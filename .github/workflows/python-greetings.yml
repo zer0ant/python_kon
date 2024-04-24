@@ -11,7 +11,7 @@ on:
 jobs:
   install-pip-deps:
     name: Install pip deps
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Install success
@@ -28,7 +28,7 @@ jobs:
 
   deploy-to-dev:
     name: Deploy to DEV
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [install-pip-deps]
 
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   test-on-dev:
     name: Test on DEV
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-to-dev]
 
     steps:
@@ -63,7 +63,7 @@ jobs:
 
   deploy-to-staging:
     name: Deploy to staging
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test-on-dev]
 
     steps:
@@ -72,7 +72,7 @@ jobs:
 
   test-on-staging:
     name: Test on staging
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-to-staging]
 
     steps:
@@ -91,7 +91,7 @@ jobs:
 
   test-on-preprod:
     name: Test on preprod
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-to-preprod]
 
     steps:
@@ -101,7 +101,7 @@ jobs:
 
   deploy-to-prod:
     name: Deploy to prod
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test-on-preprod]
 
     steps:
@@ -110,7 +110,7 @@ jobs:
 
   test-on-prod:
     name: Test on prod
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-to-prod]
 
     steps:
