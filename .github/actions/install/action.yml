@@ -3,9 +3,9 @@ runs:
   steps:
     - name: Install success
       run: echo Installing all required dependencies ..
-      shell: cmd.exe
+      shell: cmd
 
     - name: Install Python dependencies
       working-directory: python-greetings-file
       run: pip install -r requirements.txt
-      shell: cmd.exe
+      shell: cmd
