@@ -23,8 +23,10 @@ runs:
 
     - name: Stop process
       working-directory: python-greetings-file
-      rn: pm2 delete greetings-app-${{ inputs.environment }} & "errorlevel=0"
+      run: pm2 delete greetings-app-${{ inputs.environment }} & "errorlevel=0"
+      shell: cmd
 
     - name: Start process
       working-directory: python-greetings-file
       run: pm2 start app.py --name greetings-app-${{ inputs.environment }} -- --port ${{ inputs.port }}
+      shell: cmd
