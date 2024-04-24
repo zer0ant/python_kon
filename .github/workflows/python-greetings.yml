@@ -17,13 +17,13 @@ jobs:
       - name: Install success
         run: echo Installing all required dependencies ..
       - uses: actions/checkout@v3.5.2
-   #   - uses: actions/checkout@v3.5.2
-    #    with:
-     #     repository: 'zer0ant/python-greetings'
-     #     path: 'python-greetings-file'
-     # - name: Install Python dep
-       # working-directory: python-greetings-file
-       # run: pip install -r requirements.txt
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
+      - name: Install Python dep
+        working-directory: python-greetings-file
+        run: pip install -r requirements.txt
 
 
   deploy-to-dev:
