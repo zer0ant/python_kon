@@ -1,0 +1,30 @@
+inputs:
+  port:
+    description: 'Port for node application to run'
+    default: 7001
+  environment: 
+    description: 'Environment for node application'
+    default: 'dev'
+
+runs:   
+  using: "composite"
+  steps:
+    - name: Print output
+      run: echo Deployment to ${{ inputs.environment }} has started ..
+      shell: cmd
+
+    - name: Install dependencies
+      run: npm install
+      shell: cmd
+
+    - name: Install pm2
+      run: npm install -g pm2
+      shell: cmd
+
+    - name: Stop process
+      working-directory: python-greetings-file
+      rn: pm2 delete greetings-app-${{ inputs.environment }} & "errorlevel=0"
+
+    - name: Start process
+      working-directory: python-greetings-file
+      run: pm2 start app.py --name greetings-app-${{ inputs.environment }} -- --port ${{ inputs.port }}

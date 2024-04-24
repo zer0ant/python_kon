@@ -31,15 +31,10 @@ jobs:
       - name: Deploy to DEV success
         run: echo Deployment to DEV has started ..
       - uses: actions/checkout@v3.5.2
-     # - uses: actions/checkout@v3.5.2
-     #   with:
-      #    repository: 'zer0ant/python-greetings'
-     #     path: 'python-greetings-file'
-     # - name: Set environment
-      #  run: echo "Environment=deploy-to-dev"
-      #- name: Stop service
-       # working-directory: python-greetings-file
-        #run: pm2 delete greetings-app- {{ env.environment }} & set "errorlevel=0"
+      - uses: ./.github/actions/deploy
+        with: 
+          port: 7001
+          environment: 'dev'
 
   test-on-dev:
     name: Test on DEV
