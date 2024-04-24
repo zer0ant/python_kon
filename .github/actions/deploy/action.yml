@@ -14,16 +14,18 @@ runs:
       shell: cmd
 
     - name: Install dependencies
+      working-directory: python-greetings-file
       run: npm install
       shell: cmd
 
     - name: Install pm2
-      run: sudo npm install -g pm2
+      working-directory: python-greetings-file
+      run: npm install -g pm2
       shell: cmd
 
     - name: Stop process
       working-directory: python-greetings-file
-      run: pm2 delete greetings-app-${{ inputs.environment }} & "errorlevel=0"
+      run: pm2 delete greetings-app-${{ inputs.environment }} || set "errorlevel=0"
       shell: cmd
 
     - name: Start process
