@@ -1,0 +1,11 @@
+runs:   
+  using: "composite"
+  steps:
+    - name: Install success
+      run: echo Installing all required dependencies ..
+      shell: bash
+
+    - name: Install Python dependencies
+      working-directory: python-greetings-file
+      run: pip install -r requirements.txt
+      shell: bash
