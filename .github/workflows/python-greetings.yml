@@ -11,24 +11,24 @@ on:
 jobs:
   install-pip-deps:
     name: Install pip deps
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Install success
         run: echo Installing all required dependencies ..
       - uses: actions/checkout@v3.5.2
-      - uses: actions/checkout@v3.5.2
-        with:
-          repository: 'zer0ant/python-greetings'
-          path: 'python-greetings-file'
-      - name: Install Python dep
-        working-directory: python-greetings-file
-        run: pip install -r requirements.txt
+   #   - uses: actions/checkout@v3.5.2
+    #    with:
+     #     repository: 'zer0ant/python-greetings'
+     #     path: 'python-greetings-file'
+     # - name: Install Python dep
+       # working-directory: python-greetings-file
+       # run: pip install -r requirements.txt
 
 
   deploy-to-dev:
     name: Deploy to DEV
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [install-pip-deps]
 
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   test-on-dev:
     name: Test on DEV
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [deploy-to-dev]
 
     steps:
@@ -63,7 +63,7 @@ jobs:
 
   deploy-to-staging:
     name: Deploy to staging
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [test-on-dev]
 
     steps:
@@ -72,7 +72,7 @@ jobs:
 
   test-on-staging:
     name: Test on staging
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [deploy-to-staging]
 
     steps:
@@ -82,7 +82,7 @@ jobs:
 
   deploy-to-preprod:
     name: Deploy to preprod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [test-on-staging]
 
     steps:
@@ -91,7 +91,7 @@ jobs:
 
   test-on-preprod:
     name: Test on preprod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [deploy-to-preprod]
 
     steps:
@@ -101,7 +101,7 @@ jobs:
 
   deploy-to-prod:
     name: Deploy to prod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [test-on-preprod]
 
     steps:
@@ -110,7 +110,7 @@ jobs:
 
   test-on-prod:
     name: Test on prod
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [deploy-to-prod]
 
     steps:
