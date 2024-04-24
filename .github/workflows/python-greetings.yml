@@ -19,6 +19,7 @@ jobs:
         with:
           repository: 'zer0ant/python-greetings'
           path: 'python-greetings-file'
+      - uses: ./.github/actions/install
 
 
   deploy-to-dev:
