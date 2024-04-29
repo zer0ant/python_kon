@@ -1,0 +1,18 @@
+inputs:
+  environment: 
+    description: 'Environment for node application'
+    default: 'dev'
+
+runs:   
+  using: "composite"
+  steps:
+    - name: Print output
+      run: echo Testing on ${{ inputs.environment }} has started ..
+      shell: cmd
+    - name: Install dependencies and run REST API integration test
+      working-directory: 'course-js-api-framework-file'
+      run: |
+        echo Testing book test set on ${{ inputs.environment }} has started ..
+        npm install
+        npm run greetings greetings_${{ inputs.environment }}
+      shell: cmd
