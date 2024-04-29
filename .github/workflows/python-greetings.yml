@@ -53,6 +53,10 @@ jobs:
       - name: Test success
         run: echo Testing on DEV has started ..
       - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
       - uses: ./.github/actions/test
         with: 
           environment: 'dev'
