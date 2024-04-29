@@ -14,19 +14,21 @@ runs:
       shell: cmd
 
     - name: Install dependencies
+      working-directory: course-js-api-framework-file
       run: npm install
       shell: cmd
 
     - name: Install pm2
+      working-directory: course-js-api-framework-file
       run: npm install -g pm2
       shell: cmd
 
     - name: Stop process
-      working-directory: python-greetings-file
+      working-directory: course-js-api-framework-file
       run: pm2 delete greetings-app-${{ inputs.environment }} || set "errorlevel=0"
       shell: cmd
 
     - name: Start process
-      working-directory: python-greetings-file
+      working-directory: course-js-api-framework-file
       run: pm2 start app.py --name greetings-app-${{ inputs.environment }} -- --port ${{ inputs.port }}
       shell: cmd
