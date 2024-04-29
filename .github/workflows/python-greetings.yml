@@ -35,6 +35,10 @@ jobs:
         with:
           repository: 'zer0ant/course-js-api-framework'
           path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
       - uses: ./.github/actions/deploy
         with: 
           port: 7001
