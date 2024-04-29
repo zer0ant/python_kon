@@ -24,11 +24,11 @@ runs:
       shell: cmd
 
     - name: Stop process
-      working-directory: course-js-api-framework-file
+      working-directory: python-greetings-file
       run: pm2 delete greetings-app-${{ inputs.environment }} || set "errorlevel=0"
       shell: cmd
 
     - name: Start process
-      working-directory: course-js-api-framework-file
+      working-directory: python-greetings-file
       run: pm2 start app.py --name greetings-app-${{ inputs.environment }} -- --port ${{ inputs.port }}
       shell: cmd
