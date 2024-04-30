@@ -23,12 +23,12 @@ runs:
       run: npm install -g pm2
       shell: cmd
 
-    - name: Delete process
-      working-directory: python-greetings-file
-      run: pm2 delete greetings-app-${{ inputs.environment }} & EXIT /B 0
-      shell: cmd
-
     - name: Start process
       working-directory: python-greetings-file
       run: pm2 start app.py --name greetings-app-${{ inputs.environment }} -- --port ${{ inputs.port }}
+      shell: cmd
+
+    - name: Delete process
+      working-directory: python-greetings-file
+      run: pm2 delete greetings-app-${{ inputs.environment }} & set "errorlevel=0"
       shell: cmd
