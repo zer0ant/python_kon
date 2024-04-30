@@ -65,14 +65,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.5.2
-    #  - uses: actions/checkout@v3.5.2
-    #    with:
-    #      repository: 'zer0ant/course-js-api-framework'
-    #      path: 'course-js-api-framework-file'
-    #  - uses: actions/checkout@v3.5.2
-    #    with:
-    #      repository: 'zer0ant/python-greetings'
-    #      path: 'python-greetings-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
       - uses: ./.github/actions/deploy
         with: 
           port: 7002
@@ -85,10 +85,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.5.2
-    #  - uses: actions/checkout@v3.5.2
-    #    with:
-    #      repository: 'zer0ant/course-js-api-framework'
-    #      path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
       - uses: ./.github/actions/test
         with: 
           environment: 'staging'
@@ -100,8 +100,19 @@ jobs:
     needs: [test-on-staging]
 
     steps:
-      - name: Deploy success
-        run: echo Deployment to preprod has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
+      - uses: ./.github/actions/deploy
+        with: 
+          port: 7003
+          environment: 'preprod'
 
   test-on-preprod:
     name: Test on preprod
@@ -109,8 +120,14 @@ jobs:
     needs: [deploy-to-preprod]
 
     steps:
-      - name: Test success
-        run: echo Testing on preprod has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: ./.github/actions/test
+        with: 
+          environment: 'preprod'
 
 
   deploy-to-prod:
@@ -119,8 +136,19 @@ jobs:
     needs: [test-on-preprod]
 
     steps:
-      - name: Deploy success
-        run: echo Deployment to prod has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
+      - uses: ./.github/actions/deploy
+        with: 
+          port: 7004
+          environment: 'prod'
 
   test-on-prod:
     name: Test on prod
@@ -128,5 +156,11 @@ jobs:
     needs: [deploy-to-prod]
 
     steps:
-      - name: Test success
-        run: echo Testing on prod has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: ./.github/actions/test
+        with: 
+          environment: 'prod'
