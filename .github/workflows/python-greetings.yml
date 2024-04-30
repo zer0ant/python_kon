@@ -96,7 +96,7 @@ jobs:
 
   deploy-to-preprod:
     name: Deploy to preprod
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [test-on-staging]
 
     steps:
