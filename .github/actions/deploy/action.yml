@@ -25,7 +25,7 @@ runs:
 
     - name: Stop process
       working-directory: python-greetings-file
-      run: pm2 delete greetings-app-${{ inputs.environment }} || set "errorlevel=0"
+      run: pm2 delete greetings-app-${{ inputs.environment }} & set "errorlevel=0"
       shell: cmd
 
     - name: Start process
