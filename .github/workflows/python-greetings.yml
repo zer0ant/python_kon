@@ -28,8 +28,6 @@ jobs:
     needs: [install-pip-deps]
 
     steps:
-      - name: Deploy to DEV success
-        run: echo Deployment to DEV has started ..
       - uses: actions/checkout@v3.5.2
       - uses: actions/checkout@v3.5.2
         with:
@@ -50,8 +48,6 @@ jobs:
     needs: [deploy-to-dev]
 
     steps:
-      - name: Test success
-        run: echo Testing on DEV has started ..
       - uses: actions/checkout@v3.5.2
       - uses: actions/checkout@v3.5.2
         with:
@@ -68,8 +64,19 @@ jobs:
     needs: [test-on-dev]
 
     steps:
-      - name: Deploy success
-        run: echo Deployment to staging has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/python-greetings'
+          path: 'python-greetings-file'
+      - uses: ./.github/actions/deploy
+        with: 
+          port: 7002
+          environment: 'staging'
 
   test-on-staging:
     name: Test on staging
@@ -77,8 +84,14 @@ jobs:
     needs: [deploy-to-staging]
 
     steps:
-      - name: Test success
-        run: echo Testing on staging has started ..
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+          repository: 'zer0ant/course-js-api-framework'
+          path: 'course-js-api-framework-file'
+      - uses: ./.github/actions/test
+        with: 
+          environment: 'staging'
 
 
   deploy-to-preprod:
